@@ -1,25 +1,14 @@
 import turtle
-import pandas
-data = pandas.read_csv('50_states.csv')
-all_states = data.state.tolist()
+from state_write import State
 screen = turtle.Screen()
-timmy = turtle.Turtle()
-timmy.penup()
-timmy.hideturtle()
 screen.title('US States Games')
 img = 'blank_states_img.gif'
 screen.addshape(img)
 turtle.shape(img)
-score = 0
+state = State('50_states.csv')
 while True:
-    answer = screen.textinput(title=f'score {score}/{len(all_states)}',prompt="What's the state: ").title()
-    if answer in all_states:
-        state = data[data.state == answer]
-        x_value = int(state.x)
-        y_value = int(state.y)
-        print(f"x: {x_value}  y:{y_value}")
-        timmy.goto(x_value, y_value)
-        timmy.write(answer, align='center', font=('Courier', 6, 'bold'))
-        score += 1
-turtle.mainloop()
-
+    answer = screen.textinput(title=f'score {state.score}/{len(state.all_states)}', prompt="What's the state: ").title()
+    if state.is_state_exist(answer):
+        position = state.get_state_position(answer)
+        state.print_state(position, answer)
+        state.score_up()
