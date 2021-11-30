@@ -22,13 +22,20 @@ while len(guessed_states) < 50:
             print('You guessed this state. try another')
             print('You guessed this state:')
             print(guessed_states)
-remaining_state = []
-for state_re in state.all_states:
-    if state_re not in guessed_states:
-        remaining_state.append(state_re)
-        position = state.get_state_position(state_re)
-        state.print_state(position, state_re,"red")
-        new_data = pandas.DataFrame(remaining_state)
-        new_data.to_csv('to_learn_state.csv')
+# remaining_state = []
+# for state_re in state.all_states:
+#     if state_re not in guessed_states:
+#         remaining_state.append(state_re)
+#         position = state.get_state_position(state_re)
+#         state.print_state(position, state_re,"red")
+#         new_data = pandas.DataFrame(remaining_state)
+#         new_data.to_csv('to_learn_state.csv')
 
+remaining_state = [state for state in state.all_states if state not in guessed_states]
+for state_re in remaining_state:
+    position = state.get_state_position(state_re)
+    state.print_state(position, state_re,"red")
+    new_data = pandas.DataFrame(remaining_state)
+    new_data.to_csv('to_learn_state.csv')
+print(remaining_state)
 
