@@ -20,11 +20,12 @@ class State:
         position = (x_val, y_val)
         return position
 
-    def print_state(self, position, answer):
+    def print_state(self, position, answer,color='black'):
         timmy = Turtle()
         timmy.penup()
         timmy.hideturtle()
         timmy.goto(position)
+        timmy.color(color)
         timmy.write(answer)
 
     def score_up(self):

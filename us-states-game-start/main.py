@@ -1,5 +1,6 @@
 import turtle
-from state_write import State
+from state_write import State, pandas
+
 screen = turtle.Screen()
 screen.title('US States Games')
 img = 'blank_states_img.gif'
@@ -26,5 +27,8 @@ for state_re in state.all_states:
     if state_re not in guessed_states:
         remaining_state.append(state_re)
         position = state.get_state_position(state_re)
-        state.print_state(position, state_re)
-print(remaining_state)
+        state.print_state(position, state_re,"red")
+        new_data = pandas.DataFrame(remaining_state)
+        new_data.to_csv('to_learn_state.csv')
+
+
