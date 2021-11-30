@@ -9,6 +9,8 @@ state = State('50_states.csv')
 guessed_states = []
 while len(guessed_states) < 50:
     answer = screen.textinput(title=f'score {state.score}/{len(state.all_states)}', prompt="What's the state: ").title()
+    if answer == 'Exit':
+        break
     if state.is_state_exist(answer):
         if answer not in guessed_states:
             guessed_states.append(answer)
