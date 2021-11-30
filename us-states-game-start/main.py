@@ -21,3 +21,10 @@ while len(guessed_states) < 50:
             print('You guessed this state. try another')
             print('You guessed this state:')
             print(guessed_states)
+remaining_state = []
+for state_re in state.all_states:
+    if state_re not in guessed_states:
+        remaining_state.append(state_re)
+        position = state.get_state_position(state_re)
+        state.print_state(position, state_re)
+print(remaining_state)
